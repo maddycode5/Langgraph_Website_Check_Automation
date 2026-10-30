@@ -1,0 +1,12 @@
+# Dependencies for LangGraph Website Automation Pipeline
+langgraph>=0.2.0
+langchain-core>=0.3.0
+langchain-ollama>=0.2.0
+pymupdf>=1.23.0
+reportlab>=4.0.0
+beautifulsoup4>=4.12.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+gspread>=6.0.0
+google-auth>=2.0.0

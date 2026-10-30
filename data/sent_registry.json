@@ -1,0 +1,25 @@
+{
+  "records": [
+    {
+      "company_name": "NovaTech Cloud",
+      "contact_email": "alex.carter@novatechcloud.example",
+      "sent_at": "2026-10-26T17:03:01.515005",
+      "status": "Simulated (Dry-Run)",
+      "pdf_file": "NovaTech_Cloud_Audit_Report_20261026_170301.pdf"
+    },
+    {
+      "company_name": "Apex Legal Partners",
+      "contact_email": "sjenkins@apexlegal.example",
+      "sent_at": "2026-10-26T17:03:25.113702",
+      "status": "Simulated (Dry-Run)",
+      "pdf_file": "Apex_Legal_Partners_Audit_Report_20261026_170325.pdf"
+    },
+    {
+      "company_name": "PulseHealth Dynamics",
+      "contact_email": "dkim@pulsehealth.example",
+      "sent_at": "2026-10-26T17:03:47.921159",
+      "status": "Simulated (Dry-Run)",
+      "pdf_file": "PulseHealth_Dynamics_Audit_Report_20261026_170347.pdf"
+    }
+  ]
+}

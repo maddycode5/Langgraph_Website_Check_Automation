@@ -1,0 +1,30 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environment & Credentials
+.env
+*.json
+!data/sent_registry.json
+
+# Local Cache Files (Dynamic Google Doc rules runtime cache)
+data/criteria_rules_cache.txt
+data/criteria_rules_meta.json
+
+# Generated Output Reports
+reports/*.pdf
+!reports/.gitkeep
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
