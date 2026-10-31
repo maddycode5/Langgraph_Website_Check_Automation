@@ -45,8 +45,12 @@ class AutomationState(TypedDict):
     # Scraped Data
     scraped_content: Dict[str, Any]  # urls, combined_text, meta_tags, response_times, page_count
 
-    # Reference PDF Criteria
+    # Reference Criteria & Benchmark Rules (Live Google Doc or Fallback)
     criteria_reference_text: str
+    google_doc_url: Optional[str]
+    rules_source: Optional[str]
+    rules_hash: Optional[str]
+    rules_updated_at: Optional[str]
 
     # LLM Evaluation & Validation
     raw_evaluation: List[AuditIssue]

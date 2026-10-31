@@ -1,0 +1,40 @@
+# WEBSITE AUDIT EVALUATION BENCHMARK & SCORING RUBRIC (v2.4)
+
+OVERVIEW:
+This reference framework establishes standards for assessing commercial and SaaS websites. Each dimension is scored on an objective 1 to 10 scale, where 1 represents severe commercial risk and 10 represents industry-leading execution. Every finding must be backed by verifiable verbatim quotes or observable metrics directly extracted from the target website.
+
+========================================================================
+PILLAR 1: TECHNICAL SEO & METADATA
+========================================================================
+- Title Tag Optimization: Specific, keyword-relevant, between 40-60 characters, with company branding.
+- Meta Description & OpenGraph: Compelling summary under 160 characters. Proper og:title and og:image tags.
+- Semantic Heading Hierarchy: Single, high-impact H1 describing core offering; logical H2/H3 sub-structure.
+- Crawlability & Canonicalization: Proper canonical tags, robots directives, and search bot friendly internal linking.
+
+========================================================================
+PILLAR 2: SPEED, PERFORMANCE & MOBILE RESPONSIVENESS
+========================================================================
+- Initial Page Load Speed: Server response time (TTFB) < 600ms; multi-page requests succeed without timeout.
+- Viewport & Mobile Meta: Accurate viewport declaration: width=device-width, initial-scale=1.0.
+- Resource Bloat & Scripting: Excessive third-party trackers, uncompressed media assets, and blocking scripts.
+
+========================================================================
+PILLAR 3: CONTENT CLARITY & VALUE PROPOSITION
+========================================================================
+- Hero Section Clarity (5-Second Test): Visitors must understand within 5 seconds: What is offered, for whom, and why it matters.
+- Benefit vs. Feature Ratio: Focus on customer outcomes and quantified impact rather than self-referential jargon.
+- Readability & Typography: Scannable typography, descriptive subheadings, bullet points, and concise paragraphs.
+
+========================================================================
+PILLAR 4: CONVERSION ARCHITECTURE & UX
+========================================================================
+- Call-to-Action (CTA) Prominence: High-contrast, benefit-oriented CTA visible above the fold and at key decision points.
+- Form Friction & Lead Capture: Minimal input fields for top-of-funnel conversion; low cognitive friction.
+- Navigation Simplicity: Clean primary header menu with no more than 5-7 intuitive top-level navigation items.
+
+========================================================================
+PILLAR 5: TRUST SIGNALS, SECURITY & COMPLIANCE
+========================================================================
+- SSL & HTTPS Security: Secure transport protocol across all assets with valid certificates.
+- Social Proof & Testimonials: Named customer testimonials, verifiable logos, case studies, or metric proof.
+- Clear Contact & Legal Info: Accessible physical address, support email/phone, privacy policy, and terms of service.

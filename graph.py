@@ -7,7 +7,7 @@ from state import AutomationState
 from nodes.read_companies import read_companies_node
 from nodes.select_company import select_company_node
 from nodes.scrape_website import scrape_website_node
-from nodes.load_reference_pdf import load_reference_pdf_node
+from nodes.load_reference_rules import load_reference_rules_node
 from nodes.evaluate_website import evaluate_website_node
 from nodes.validate_evidence import validate_evidence_node
 from nodes.rank_issues import rank_issues_node
@@ -40,7 +40,7 @@ def build_audit_workflow() -> StateGraph:
     workflow.add_node("read_companies", read_companies_node)
     workflow.add_node("select_company", select_company_node)
     workflow.add_node("scrape_website", scrape_website_node)
-    workflow.add_node("load_reference_pdf", load_reference_pdf_node)
+    workflow.add_node("load_reference_rules", load_reference_rules_node)
     workflow.add_node("evaluate_website", evaluate_website_node)
     workflow.add_node("validate_evidence", validate_evidence_node)
     workflow.add_node("rank_issues", rank_issues_node)
@@ -63,8 +63,8 @@ def build_audit_workflow() -> StateGraph:
         }
     )
 
-    workflow.add_edge("scrape_website", "load_reference_pdf")
-    workflow.add_edge("load_reference_pdf", "evaluate_website")
+    workflow.add_edge("scrape_website", "load_reference_rules")
+    workflow.add_edge("load_reference_rules", "evaluate_website")
     workflow.add_edge("evaluate_website", "validate_evidence")
     workflow.add_edge("validate_evidence", "rank_issues")
     workflow.add_edge("rank_issues", "load_placeholders")

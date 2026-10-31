@@ -148,12 +148,13 @@ def evaluate_website_node(state: AutomationState) -> Dict[str, Any]:
     company = state.get("current_company")
     scraped = state.get("scraped_content", {})
     criteria = state.get("criteria_reference_text", "")
+    rules_source = state.get("rules_source", "reference rubric")
     logs = list(state.get("logs", []))
 
     if not company:
         return {"logs": logs}
 
-    logs.append(f"[{datetime.now().strftime('%H:%M:%S')}] [Node 5] Evaluating website with Ollama ({OLLAMA_MODEL})...")
+    logs.append(f"[{datetime.now().strftime('%H:%M:%S')}] [Node 5] Evaluating website with Ollama ({OLLAMA_MODEL}) using {rules_source}...")
 
     prompt = f"""You are a world-class digital audit expert. Evaluate this website against the reference criteria rubric.
 
@@ -163,7 +164,7 @@ URL: {company['website_url']}
 Industry: {company['industry']}
 
 REFERENCE CRITERIA (Benchmark Rubric):
-{criteria[:1200]}
+{criteria[:3500]}
 
 WEBSITE SCRAPED DATA:
 Homepage Title: {scraped.get('homepage_title')}

@@ -18,8 +18,14 @@ OLLAMA_TIMEOUT_SECONDS = int(os.getenv("OLLAMA_TIMEOUT_SECONDS", "120"))
 DATA_DIR = BASE_DIR / "data"
 REPORTS_DIR = BASE_DIR / "reports"
 CRITERIA_PDF_PATH = BASE_DIR / "criteria_reference.pdf"
+CRITERIA_RULES_CACHE_PATH = DATA_DIR / "criteria_rules_cache.txt"
+CRITERIA_RULES_META_PATH = DATA_DIR / "criteria_rules_meta.json"
+CRITERIA_TEMPLATE_PATH = DATA_DIR / "criteria_reference_template.txt"
 COMPANIES_CSV_PATH = DATA_DIR / "companies.csv"
 SENT_REGISTRY_PATH = DATA_DIR / "sent_registry.json"
+
+# Google Doc Rules Configuration (Dynamic Live Benchmark Rules)
+GOOGLE_DOC_RULES_URL = os.getenv("GOOGLE_DOC_RULES_URL", os.getenv("CRITERIA_DOC_URL", "")).strip()
 
 # Google Sheets Configuration (Optional)
 GOOGLE_SERVICE_ACCOUNT_JSON = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "")
