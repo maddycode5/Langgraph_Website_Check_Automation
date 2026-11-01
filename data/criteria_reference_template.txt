@@ -1,40 +1,109 @@
-# WEBSITE AUDIT EVALUATION BENCHMARK & SCORING RUBRIC (v2.4)
-
-OVERVIEW:
-This reference framework establishes standards for assessing commercial and SaaS websites. Each dimension is scored on an objective 1 to 10 scale, where 1 represents severe commercial risk and 10 represents industry-leading execution. Every finding must be backed by verifiable verbatim quotes or observable metrics directly extracted from the target website.
-
-========================================================================
-PILLAR 1: TECHNICAL SEO & METADATA
-========================================================================
-- Title Tag Optimization: Specific, keyword-relevant, between 40-60 characters, with company branding.
-- Meta Description & OpenGraph: Compelling summary under 160 characters. Proper og:title and og:image tags.
-- Semantic Heading Hierarchy: Single, high-impact H1 describing core offering; logical H2/H3 sub-structure.
-- Crawlability & Canonicalization: Proper canonical tags, robots directives, and search bot friendly internal linking.
-
-========================================================================
-PILLAR 2: SPEED, PERFORMANCE & MOBILE RESPONSIVENESS
-========================================================================
-- Initial Page Load Speed: Server response time (TTFB) < 600ms; multi-page requests succeed without timeout.
-- Viewport & Mobile Meta: Accurate viewport declaration: width=device-width, initial-scale=1.0.
-- Resource Bloat & Scripting: Excessive third-party trackers, uncompressed media assets, and blocking scripts.
-
-========================================================================
-PILLAR 3: CONTENT CLARITY & VALUE PROPOSITION
-========================================================================
-- Hero Section Clarity (5-Second Test): Visitors must understand within 5 seconds: What is offered, for whom, and why it matters.
-- Benefit vs. Feature Ratio: Focus on customer outcomes and quantified impact rather than self-referential jargon.
-- Readability & Typography: Scannable typography, descriptive subheadings, bullet points, and concise paragraphs.
-
-========================================================================
-PILLAR 4: CONVERSION ARCHITECTURE & UX
-========================================================================
-- Call-to-Action (CTA) Prominence: High-contrast, benefit-oriented CTA visible above the fold and at key decision points.
-- Form Friction & Lead Capture: Minimal input fields for top-of-funnel conversion; low cognitive friction.
-- Navigation Simplicity: Clean primary header menu with no more than 5-7 intuitive top-level navigation items.
-
-========================================================================
-PILLAR 5: TRUST SIGNALS, SECURITY & COMPLIANCE
-========================================================================
-- SSL & HTTPS Security: Secure transport protocol across all assets with valid certificates.
-- Social Proof & Testimonials: Named customer testimonials, verifiable logos, case studies, or metric proof.
-- Clear Contact & Legal Info: Accessible physical address, support email/phone, privacy policy, and terms of service.
+﻿1. Industry fit and website positioning
+Does the website look and communicate like a professional website for its industry and specialty? 
+For a dental clinic, assess whether the website communicates healthcare, hygiene, patient care,  clinical expertise, and reassurance. For a pediatric dentist, check whether the design feels welcoming  to children and reassuring to parents. For a cosmetic dental clinic, assess whether the presentation  fits a premium aesthetic service. 
+The LLM should evaluate: 
+• Whether the visual design, language, imagery, and tone suit the industry. • Whether the specialty is immediately clear. 
+• Whether the website appears generic or tailored to this particular business. 
+• Whether the presentation matches the intended positioning, such as affordable, premium,  family-focused, or specialist care. 
+Example finding: “The website promotes pediatric dentistry, but its messaging and imagery do not  clearly establish a child-friendly experience or reassure parents about treating young patients.” 
+Source-code limitation: use screenshots or rendered-page inspection to judge actual design. 2. Above-the-fold clarity and first impression 
+Does the first screen tell visitors what the business does, whom it serves, where it operates, and  what to do next? 
+Check the hero heading, supporting description, primary CTA, location, and relevant imagery. 
+Example: “The homepage opens with ‘Welcome to our clinic’ instead of identifying the clinic's  specialty, location, or key offering.” 
+3. Industry-specific content coverage 
+Does the website contain the information customers in that industry typically need before making a  decision? 
+For clinics, assess specialty-specific treatments, patient concerns, consultation processes, recovery or  aftercare information where relevant, and patient eligibility. Do not require every topic on every  clinic website. 
+Example: “The clinic promotes dental implants but offers no substantive explanation of the  treatment or consultation process.” 
+4. Service coverage and dedicated service pages 
+Check whether important services have dedicated pages, whether the pages contain useful  information, and whether links to them work. 
+For a dental clinic, this could include root canal treatment, dental implants, orthodontics, crowns,  and pediatric dentistry where offered. 
+Example: “The homepage lists multiple treatments, but the website provides no dedicated  information for the clinic's key services.”
+5. Content relevance and customer intent 
+Determine whether the content answers the questions that a potential customer would have at  different stages: researching a problem, comparing options, evaluating the business, and deciding to  book. 
+Example: “The page describes a treatment in technical terms but doesn't address common patient  concerns or explain how to arrange a consultation.” 
+6. Trust and credibility signals 
+Evaluate whether the website provides enough verifiable information for a visitor to feel comfortable  contacting the business. 
+For clinics, inspect doctor names, qualifications, relevant experience, team profiles, clinic  photographs, genuine reviews, and appropriate professional information. 
+Example: “The website lists several treatments but provides no identifiable practitioner profile or  verifiable professional credentials.” 
+For healthcare websites, accuracy and expertise deserve particular attention because the  information can affect people's health decisions.  
+7. Testimonials and social proof 
+Check whether testimonials or reviews are present, relevant, attributable where appropriate, and  connected to the services being promoted. 
+For clinics, look for patient feedback, approved case studies, or genuine before-and-after examples  where appropriate and consented to. 
+Example: “The website has no patient feedback or other visible evidence of patient experience,  leaving prospective patients with fewer ways to assess the clinic.” 
+Absence of testimonials is a potential trust gap, not proof that the business lacks satisfied customers. 8. Business-specific FAQs 
+Evaluate whether the website answers the most relevant questions for its industry, specialty, and  customer base. 
+For a dental clinic, examples may include: 
+• What happens during the first consultation? 
+• How can I book an appointment? 
+• Which treatments does the clinic offer? 
+• What should I expect during a particular treatment? 
+• How can I contact the clinic about costs or suitability? 
+Example: “The clinic promotes orthodontic treatment but provides no answers to common questions  about consultations, treatment suitability, or the next steps.”
+The LLM should generate expected FAQ topics from {{industry}}, {{clinic_specialty}}, and  {{services_offered}}, then compare them with the actual page content. 
+9. CTA presence, relevance, and placement 
+Check whether the website has clear, appropriate actions such as Book an Appointment, Call Now,  Request a Consultation, Get a Quote, or Order Online. 
+Assess whether CTAs appear at relevant decision points and whether their wording matches the  visitor's intent. 
+Example: “The service page explains the treatment but does not offer a clear next step for requesting  a consultation.” 
+10. Conversion blockers and friction 
+Go beyond checking whether a CTA exists. Determine whether anything prevents the visitor from  completing the intended action. 
+Inspect: 
+• Missing or hard-to-find phone, WhatsApp, booking, or enquiry options. 
+• Forms with excessive or unnecessary fields. 
+• Missing confirmation or unclear submission steps. 
+• Booking links that lead to irrelevant destinations. 
+• Conflicting contact details or confusing instructions. 
+• Unclear next steps after reading a service page. 
+Example: “The appointment form requests extensive information before a patient can submit an  enquiry, potentially creating unnecessary friction.” 
+Actual form submission and booking flows must be tested separately. 
+11. Contact accessibility and business information 
+Check whether visitors can readily find the business's phone number, address, operating hours, and  appropriate contact methods. 
+For local clinics, verify that the address and phone number are consistently represented on key  pages. 
+Example: “The website contains an address in the footer but no detectable click-to-call link or clear  appointment contact option.” 
+12. Social media integration 
+Check whether the website links to the business's official Instagram, Facebook, YouTube, or other  relevant profiles. 
+Inspect the actual destinations, not merely the presence of social media icons. Also check whether  links are missing from expected locations or point to unrelated accounts.
+Example: “The website contains no detectable link to the clinic's Instagram profile, creating a missed  opportunity for visitors to explore its social content.” 
+This identifies a connection gap; it does not establish that social media integration alone would improve rankings. 
+13. Homepage content hierarchy and navigation 
+Assess whether information is organized in a logical sequence: business introduction, services, trust  evidence, relevant differentiators, FAQs where useful, and contact or booking options. 
+Check heading hierarchy, navigation labels, service discovery, and the route from the homepage to  key pages. 
+Example: “The homepage lists treatments without a clear content structure or an obvious route from  service discovery to appointment booking.” 
+14. SEO titles and meta descriptions 
+Inspect every important page for a unique, descriptive title and an appropriate meta description. 
+Assess whether titles accurately represent the service and, where relevant, its location. Flag missing,  duplicated, vague, or misleading metadata. 
+Example: “Several service pages use the same generic title, making it harder to distinguish their  individual topics in search results.” 
+Google may generate title links and snippets from several sources, so metadata improvements are  not a guarantee of higher rankings.  
+15. SEO content and keyword-to-page alignment 
+Determine whether each important page clearly targets a relevant service or topic and provides  content that satisfies the likely search intent. 
+Use {{industry}}, {{clinic_specialty}}, {{city}}, and {{services_offered}} to assess whether important  topics and local context are appropriately represented. 
+Example: “The clinic offers dental implants in Lucknow, but its implant page does not clearly  communicate the service and location in its main content.” 
+Do not force keywords into every heading or treat keyword frequency as a ranking score. 16. Technical SEO and indexability 
+Check for missing or incorrect canonical tags, accidental noindex directives, robots directives, broken  internal links, missing important pages from the crawl, and relevant structured data. 
+Example: “The service page includes a noindex directive that could prevent it from appearing in  search results.” 
+Verify the actual HTTP response, robots.txt, rendered content, and canonical destination before  treating suspected problems as confirmed. Google's SEO guidance explains the importance of  crawlability, indexing, and helping Google understand pages. 
+17. Local SEO and Google Business Profile alignment 
+Evaluate whether the website supports local discovery through clear location information, consistent  business details, relevant service and location content, and links to the correct business profiles. 
+Where available, compare the website against the client's actual Google Business Profile. 
+Example: “The clinic's website identifies its services but does not clearly communicate the city or  service area it serves.” 
+A website scraper alone cannot establish the quality, verification status, or performance of a Google  Business Profile. That requires a separate data source. 
+18. Search visibility and reasons for poor ranking 
+This needs more than an LLM reading HTML. Assess potential ranking barriers and collect external  evidence. 
+Check: 
+• Whether important URLs are indexed. 
+• Whether Google can crawl and render key content. 
+• Whether the site has relevant service-specific landing pages. 
+• Whether content adequately satisfies search intent. 
+• Whether there are signs of duplicate or thin content. 
+• Whether competing pages provide more useful or credible information. 
+• Whether relevant internal links and external authority signals are available. • Search Console impressions, clicks, queries, and positions, if the client provides access. 
+Example finding: “The website has no dedicated page for a major service, limiting the site's ability to  provide a focused result for searches about that treatment.” 
+Important: The LLM must label these as potential ranking limitations unless it has evidence. A  source-code scrape cannot determine definitively why a website ranks poorly—or establish that it  doesn't rank at all. Google visibility depends on indexing, competition, query intent, and multiple  other signals.  
+19. Mobile experience and technical performance 
+Evaluate the website at mobile screen sizes and measure loading, responsiveness, and visual stability. 
+Check whether phone and booking CTAs are usable on mobile, forms fit the screen, important  content is accessible, and layout issues interfere with navigation. 
+Example: “The booking CTA is difficult to access in the mobile layout, potentially making it harder for  mobile visitors to enquire.”
+Use browser-based testing and Page Speed Insights or Lighthouse for measurements. Google  identifies LCP, INP, and CLS as Core Web Vitals. 
+20. Visual assets and industry-specific proof 
+Check whether images and videos reinforce the intended positioning and provide useful evidence of  the actual business. 
+For clinics, this may include authentic clinic interiors, practitioner photographs, relevant equipment,  and consented patient case examples. For restaurants, menus and actual food imagery may be more  relevant. 
+Example: “The website relies on generic service imagery and provides little visual evidence of the  actual clinic or its practitioners.”

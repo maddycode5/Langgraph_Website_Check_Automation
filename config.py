@@ -25,7 +25,10 @@ COMPANIES_CSV_PATH = DATA_DIR / "companies.csv"
 SENT_REGISTRY_PATH = DATA_DIR / "sent_registry.json"
 
 # Google Doc Rules Configuration (Dynamic Live Benchmark Rules)
-GOOGLE_DOC_RULES_URL = os.getenv("GOOGLE_DOC_RULES_URL", os.getenv("CRITERIA_DOC_URL", "")).strip()
+GOOGLE_DOC_RULES_URL = os.getenv(
+    "GOOGLE_DOC_RULES_URL",
+    os.getenv("CRITERIA_DOC_URL", "https://docs.google.com/document/d/1m4aU0MB1w2vxqA1PuCVPLLIktNMB7WLoJDT994fSpMQ/edit?usp=sharing")
+).strip()
 
 # Google Sheets Configuration (Optional)
 GOOGLE_SERVICE_ACCOUNT_JSON = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "")

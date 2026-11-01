@@ -90,10 +90,11 @@ flowchart TD
 
 The benchmark evaluation criteria are no longer limited to a static file. You can manage and update your evaluation rubric live in a Google Doc:
 
-1. **Live Synchronisation**: Evaluates against the latest live content from your Google Doc link.
+1. **Live Synchronisation**: Evaluates against the latest live content from the reference rules Google Doc link:
+   - **Active Reference Doc**: [Google Doc Benchmark Rubric](https://docs.google.com/document/d/1m4aU0MB1w2vxqA1PuCVPLLIktNMB7WLoJDT994fSpMQ/edit?usp=sharing) (Configured with view-only permissions).
 2. **Continuous Change Detection**: Computes SHA-256 hashes of the doc text on every run and each company cycle. If rules are modified in Google Docs, the pipeline detects the change, logs the update (`v1 -> v2`), and follows the revised rules immediately.
 3. **Resilient Offline Caching**: Persists synced rules to `data/criteria_rules_cache.txt` and `data/criteria_rules_meta.json`. If network connectivity is lost, execution continues seamlessly using the cached rules.
-4. **Fallback Rubric**: If no Google Doc URL is configured and no cache is present, falls back gracefully to `criteria_reference.pdf` (parsed via PyMuPDF) or built-in 5-pillar benchmark standards.
+4. **Fallback Rubric**: If no Google Doc URL is configured and no cache is present, falls back gracefully to `criteria_reference.pdf` (parsed via PyMuPDF) or built-in benchmark standards.
 
 ---
 
@@ -150,15 +151,15 @@ Copy `.env.example` to `.env`:
 cp .env.example .env
 ```
 
-Add your Google Doc link to `.env`:
+The pipeline is pre-configured with the reference rules doc link:
 ```env
-GOOGLE_DOC_RULES_URL=https://docs.google.com/document/d/your-doc-id/edit?usp=sharing
+GOOGLE_DOC_RULES_URL=https://docs.google.com/document/d/1m4aU0MB1w2vxqA1PuCVPLLIktNMB7WLoJDT994fSpMQ/edit?usp=sharing
 ```
-*(Ensure the Google Doc sharing setting is set to "Anyone with the link can view").*
+*(Configured with view-only permissions for dynamic reference rule loading).*
 
-You can also pass the URL directly via CLI:
+You can also override the URL directly via CLI:
 ```bash
-python main.py --doc-url "https://docs.google.com/document/d/your-doc-id/edit?usp=sharing"
+python main.py --doc-url "https://docs.google.com/document/d/1m4aU0MB1w2vxqA1PuCVPLLIktNMB7WLoJDT994fSpMQ/edit?usp=sharing"
 ```
 
 ### 3. Ollama Setup (Local LLM)
