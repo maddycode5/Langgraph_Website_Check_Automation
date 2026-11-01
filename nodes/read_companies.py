@@ -62,8 +62,8 @@ def read_from_csv() -> List[CompanyRecord]:
     with open(COMPANIES_CSV_PATH, mode="r", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         for i, row in enumerate(reader, start=1):
-            name = row.get("company_name", "").strip()
-            url = row.get("website_url", "").strip()
+            name = str(row.get("company_name") or "").strip()
+            url = str(row.get("website_url") or "").strip()
             if not name or not url:
                 continue
 
@@ -71,13 +71,13 @@ def read_from_csv() -> List[CompanyRecord]:
                 id=str(row.get("id") or i),
                 company_name=name,
                 website_url=url,
-                contact_name=row.get("contact_name", "Decision Maker").strip(),
-                contact_email=row.get("contact_email", "").strip(),
-                industry=row.get("industry", "Technology").strip(),
-                status=row.get("status", "Pending").strip(),
-                report_path=row.get("report_path", "").strip() or None,
-                notes=row.get("notes", "").strip() or None,
-                updated_at=row.get("updated_at", "").strip() or None
+                contact_name=str(row.get("contact_name") or "Decision Maker").strip(),
+                contact_email=str(row.get("contact_email") or "").strip(),
+                industry=str(row.get("industry") or "Technology").strip(),
+                status=str(row.get("status") or "Pending").strip(),
+                report_path=str(row.get("report_path") or "").strip() or None,
+                notes=str(row.get("notes") or "").strip() or None,
+                updated_at=str(row.get("updated_at") or "").strip() or None
             ))
     return companies
 
