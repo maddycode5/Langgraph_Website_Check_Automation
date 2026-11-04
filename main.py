@@ -3,6 +3,12 @@
 import sys
 import argparse
 from datetime import datetime
+
+# Configure UTF-8 encoding for standard outputs on Windows
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 from config import (
     CRITERIA_PDF_PATH,
     CRITERIA_RULES_CACHE_PATH,
@@ -49,7 +55,7 @@ def main():
     else:
         print(f"[*] Initializing fallback criteria reference PDF at: {CRITERIA_PDF_PATH}...")
         generate_criteria_pdf(CRITERIA_PDF_PATH)
-        print("[✓] Fallback criteria reference PDF created.")
+        print("[OK] Fallback criteria reference PDF created.")
 
     print(f"[*] Launching LangGraph pipeline execution at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}...\n")
 
@@ -91,20 +97,20 @@ def main():
         print("=" * 72)
         companies = final_state.get("companies", [])
         for c in companies:
-            print(f"  • Company: {c['company_name']}")
+            print(f"  - Company: {c['company_name']}")
             print(f"    URL:     {c['website_url']}")
             print(f"    Status:  {c['status']}")
             print(f"    Report:  {c.get('report_path') or 'N/A'}")
             print(f"    Notes:   {c.get('notes') or 'N/A'}")
             print("  " + "-" * 68)
 
-        print(f"\n[✓] Pipeline execution finished successfully. Total Companies Processed: {len(companies)}\n")
+        print(f"\n[OK] Pipeline execution finished successfully. Total Companies Processed: {len(companies)}\n")
 
     except KeyboardInterrupt:
         print("\n[!] Execution interrupted by user.")
         sys.exit(1)
     except Exception as exc:
-        print(f"\n[✗] Pipeline encountered an unhandled exception: {exc}")
+        print(f"\n[X] Pipeline encountered an unhandled exception: {exc}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

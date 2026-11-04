@@ -31,8 +31,15 @@ GOOGLE_DOC_RULES_URL = os.getenv(
 ).strip()
 
 # Google Sheets Configuration (Optional)
-GOOGLE_SERVICE_ACCOUNT_JSON = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "")
-GOOGLE_SHEET_NAME = os.getenv("GOOGLE_SHEET_NAME", "Website_Audit_Leads")
+_raw_sa_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "").strip()
+if _raw_sa_json:
+    _sa_path = Path(_raw_sa_json)
+    if not _sa_path.is_absolute():
+        _sa_path = (BASE_DIR / _sa_path).resolve()
+    GOOGLE_SERVICE_ACCOUNT_JSON = str(_sa_path)
+else:
+    GOOGLE_SERVICE_ACCOUNT_JSON = ""
+GOOGLE_SHEET_NAME = os.getenv("GOOGLE_SHEET_NAME", "Website_Audit_Leads").strip()
 
 # Web Scraping Configuration
 MAX_PAGES_PER_SITE = int(os.getenv("MAX_PAGES_PER_SITE", "3"))

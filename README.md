@@ -98,6 +98,16 @@ The benchmark evaluation criteria are no longer limited to a static file. You ca
 
 ---
 
+## Google Sheets Integration & URL-Only Mode
+
+The pipeline natively connects with **Google Sheets** for real-time lead ingestion and status synchronization:
+
+1. **Dual Queue Sources**: Attempts to read target companies from Google Sheets (`Website_Audit_Leads`) via a Google Service Account. If unconfigured or offline, seamlessly falls back to `data/companies.csv`.
+2. **URL-Only Auto-Inference**: When input data only contains website URLs (e.g. `website_url` column), the pipeline automatically extracts and cleans the brand/company name from the domain (e.g., `https://thedermabright.com/` → `Thedermabright`), filling in defaults for contacts and industry without requiring manual data prep.
+3. **Two-Way Synchronization**: As each audit finishes (Node 12), the pipeline writes the audit status, output PDF file path, score summary, and timestamp directly back into the Google Sheet in real time.
+
+---
+
 ## Directory Structure
 
 ```
@@ -145,7 +155,7 @@ cd Langgraph_Website_Automation
 pip install -r requirements.txt
 ```
 
-### 2. Configure Environment & Google Doc Rules
+### 2. Configure Environment & Rules
 Copy `.env.example` to `.env`:
 ```bash
 cp .env.example .env
@@ -157,7 +167,17 @@ GOOGLE_DOC_RULES_URL=https://docs.google.com/document/d/1m4aU0MB1w2vxqA1PuCVPLLI
 ```
 *(Configured with view-only permissions for dynamic reference rule loading).*
 
-You can also override the URL directly via CLI:
+#### Optional: Google Sheets Connection
+To read and write company leads to a Google Sheet instead of CSV:
+1. Place your Google Service Account key at `credentials/service_account.json`.
+2. Share your Google Sheet (e.g. `Website_Audit_Leads`) with the service account email as **Editor**.
+3. Configure your `.env`:
+   ```env
+   GOOGLE_SERVICE_ACCOUNT_JSON=credentials/service_account.json
+   GOOGLE_SHEET_NAME=Website_Audit_Leads
+   ```
+
+You can also override the rules doc URL directly via CLI:
 ```bash
 python main.py --doc-url "https://docs.google.com/document/d/1m4aU0MB1w2vxqA1PuCVPLLIktNMB7WLoJDT994fSpMQ/edit?usp=sharing"
 ```
