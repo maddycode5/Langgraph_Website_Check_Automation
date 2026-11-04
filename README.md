@@ -106,6 +106,31 @@ The pipeline natively connects with **Google Sheets** for real-time lead ingesti
 2. **URL-Only Auto-Inference**: When input data only contains website URLs (e.g. `website_url` column), the pipeline automatically extracts and cleans the brand/company name from the domain (e.g., `https://thedermabright.com/` → `Thedermabright`), filling in defaults for contacts and industry without requiring manual data prep.
 3. **Two-Way Synchronization**: As each audit finishes (Node 12), the pipeline writes the audit status, output PDF file path, score summary, and timestamp directly back into the Google Sheet in real time.
 
+### Sheet Schema & Column Layout
+
+| Column | Required | Description | Example |
+|---|---|---|---|
+| `id` | Optional | Unique identifier or row index | `1` |
+| `company_name` | Optional | Auto-derived from URL domain if blank | `Dermatokare` |
+| `website_url` | **Required** | The target website to crawl and audit | `https://drafrozskinhairclinic.com/` |
+| `contact_name` | Optional | Decision maker name for personalization | `Dr. Garima Mehrotra` |
+| `contact_email` | Optional | Recipient email for report dispatch | `info@clinic.example` |
+| `industry` | Optional | Business vertical (defaults to `Technology` or vertical category) | `Dermatology & Skincare` |
+| `status` | **Required** | Queue flag (`Pending` to process) | `Pending` -> `Completed` |
+| `report_path` | System | Auto-populated path to generated PDF report | `reports/Report_*.pdf` |
+| `notes` | System | Audit score summary and delivery logs | `Score: 7.4/10 \| Dry-Run Simulation Active` |
+| `updated_at` | System | Timestamp of last audit update | `2026-11-05 01:29:30` |
+
+### Batch Importing URLs (`scripts/populate_sheet.py`)
+
+A helper script is included to quickly deduplicate and load a raw list of website URLs into your connected Google Sheet:
+
+```bash
+python scripts/populate_sheet.py
+```
+
+This cleans query parameters, deduplicates base domains, derives readable names, and writes formatted rows with `status = Pending`.
+
 ---
 
 ## Directory Structure
@@ -121,8 +146,10 @@ Langgraph_Website_Automation/
 ├── requirements.txt                   # Python dependencies
 ├── setup_criteria_pdf.py              # Fallback PDF rubric generator
 ├── state.py                           # TypedDict state schema definitions
+├── credentials/                       # Service account JSON keys (gitignored)
+│   └── service_account.json
 ├── data/
-│   ├── companies.csv                  # Target leads database
+│   ├── companies.csv                  # Target leads database (CSV fallback)
 │   ├── criteria_reference_template.txt# Starter rubric text for Google Docs
 │   └── sent_registry.json             # Duplicate guard outreach registry
 ├── nodes/
@@ -140,6 +167,8 @@ Langgraph_Website_Automation/
 │   ├── generate_pdf.py                # Node 10: Publication-grade ReportLab PDF engine
 │   ├── email_report.py                # Node 11: SMTP sender + Duplicate Guard
 │   └── update_status.py               # Node 12: CSV / Sheet persistence updater
+├── scripts/
+│   └── populate_sheet.py              # Batch URL importer & deduplicator for Google Sheets
 ├── tests/
 │   └── test_google_doc_rules.py       # Unit tests for URL parsing, change detection, and caching
 └── reports/                           # Generated PDF audit reports
@@ -196,5 +225,18 @@ python main.py
 
 ### 5. Inspect Results
 - Check the generated PDF reports in the `reports/` folder.
-- Inspect updated statuses and paths in `data/companies.csv`.
+- Inspect updated statuses and paths in your Google Sheet (or `data/companies.csv`).
 - Inspect outreach logs in `data/sent_registry.json`.
+
+---
+
+## Troubleshooting & Best Practices
+
+| Issue / Symptom | Root Cause | Solution |
+|---|---|---|
+| `ModuleNotFoundError: No module named 'dotenv'` | Python virtual environment has not had `requirements.txt` installed | Run `python -m pip install -r requirements.txt` or execute using system Python (`python main.py`). |
+| `SpreadsheetNotFound` on Google Sheets connect | The spreadsheet file title in Google Drive does not match `GOOGLE_SHEET_NAME` | Ensure the Google Sheet title matches `GOOGLE_SHEET_NAME` in `.env` exactly (default: `Website_Audit_Leads`). |
+| `APIError: 403 Forbidden` on Google Sheets connect | The service account email has not been granted access to the sheet | Open Google Sheet -> Click **Share** -> Add the `client_email` from `service_account.json` with **Editor** permissions. |
+| `iam.disableServiceAccountKeyCreation` error in Google Cloud | Google Cloud Organization has an organization policy blocking service account keys | Create the Google Cloud project with **Location: "No organization"** under your personal account. |
+| Pipeline falls back to built-in heuristic evaluator | Ollama service is not running on port 11434 | Run `ollama serve` and `ollama run llama3.2:1b`. Execution continues seamlessly even if Ollama is offline. |
+
