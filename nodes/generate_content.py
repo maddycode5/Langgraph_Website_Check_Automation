@@ -62,12 +62,11 @@ def generate_content_node(state: AutomationState) -> Dict[str, Any]:
 
     # Default robust content synthesis
     exec_summary = (
-        f"A comprehensive performance and conversion assessment was conducted for {company_name} "
-        f"in the {industry} space. Across the 5 foundational evaluation pillars, {company_name} achieved "
-        f"an aggregate score of {overall_score} out of 10. While core infrastructure demonstrates competence in "
-        f"'{placeholders.get('strongest_area', 'Baseline Performance')}', significant commercial upside remains uncaptured "
-        f"due to deficiencies in '{weakest['category']}' (scoring {weakest['score']}/10). Addressing these specific vulnerabilities "
-        f"will directly reduce bounce rates and improve qualified inbound conversion."
+        f"A comprehensive 20-pillar performance and conversion audit was conducted for {company_name} "
+        f"in the {industry} sector based on standardized criteria guidelines. Across the evaluated criteria, {company_name} achieved "
+        f"a composite rating of {overall_score} out of 10. The audit verified {len(critical_fixes)} primary flaws and conversion vulnerabilities, "
+        f"with the most critical constraint identified in '{weakest['category']}' (scoring {weakest['score']}/10). "
+        f"Executing the prioritized recommendations detailed in this report will eliminate user friction, protect search visibility, and increase qualified client inquiries."
     )
 
     outreach_subject = f"Digital Performance Audit for {company_name} ({placeholders.get('weakest_area')} Findings)"

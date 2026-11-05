@@ -21,42 +21,42 @@ id,company_name,website_url,contact_name,contact_email,industry,status,report_pa
 20,Clearnhear,https://clearnhear.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Clearnhear_Audit_Report_20261105_013808.pdf,Score: 7.4/10 | Dry-Run Simulation Active,2026-11-05 01:38:08
 21,Medisculpclinics,http://www.medisculpclinics.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Medisculpclinics_Audit_Report_20261105_013836.pdf,Score: 5.2/10 | Dry-Run Simulation Active,2026-11-05 01:38:36
 22,Cosmolooks,https://cosmolooks.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Cosmolooks_Audit_Report_20261105_013902.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:39:02
-23,Skinspecialistinlucknow,https://www.skinspecialistinlucknow.com/chowk.php,Decision Maker,,Dermatology & Skincare,Pending,,,
-24,Smtskinclinic,https://smtskinclinic.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-25,Yuvaskinlasercentre,http://www.yuvaskinlasercentre.com/promod_agarwal.htm,Decision Maker,,Dermatology & Skincare,Pending,,,
-26,Apollo247,https://www.apollo247.com/specialties,Decision Maker,,Dermatology & Skincare,Pending,,,
-27,Apollocliniclucknow,https://apollocliniclucknow.com/clinic-services/,Decision Maker,,Dermatology & Skincare,Pending,,,
-28,Midlandhealthcare,https://midlandhealthcare.org/,Decision Maker,,Dermatology & Skincare,Pending,,,
-29,Kidneyfailure,http://www.kidneyfailure.co.in/,Decision Maker,,Dermatology & Skincare,Pending,,,
-30,Drjainhomeopathy,https://drjainhomeopathy.in/,Decision Maker,,Dermatology & Skincare,Pending,,,
-31,Theskinartclinic,https://www.theskinartclinic.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-32,Clinics,https://clinics.kaya.in/near-me/lucknow/Halwasiya-House/kaya-skin-hair-clinic-in-Halwasiya-House-lucknow--5jB5Yq/home,Decision Maker,,Dermatology & Skincare,Pending,,,
-33,Dermaklinic,https://www.dermaklinic.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-34,Glowlaserclinic,https://glowlaserclinic.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-35,Kaya,https://www.kaya.in/,Decision Maker,,Dermatology & Skincare,Pending,,,
-36,Dermaxskincliniclucknow,https://dermaxskincliniclucknow.in/,Decision Maker,,Dermatology & Skincare,Pending,,,
-37,Skinhairlaser,https://skinhairlaser.co/,Decision Maker,,Dermatology & Skincare,Pending,,,
-38,Drvipulgupta,https://www.drvipulgupta.in/,Decision Maker,,Dermatology & Skincare,Pending,,,
-39,Clinics,https://clinics.drbatras.com/lucknow/homeopathy-clinic-ashok-marg.php,Decision Maker,,Dermatology & Skincare,Pending,,,
-40,Drjpagrawal,https://drjpagrawal.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-41,Talwarskincentre,https://www.talwarskincentre.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-42,Drlinki,https://drlinki.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-43,Twachaklinic,http://www.twachaklinic.in.net/,Decision Maker,,Dermatology & Skincare,Pending,,,
-44,Sites,https://sites.google.com/view/jayshreeskinclinic,Decision Maker,,Dermatology & Skincare,Pending,,,
-45,Drrizvicosmeticdermatology,https://drrizvicosmeticdermatology.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-46,Shreeaestheticskincare,https://shreeaestheticskincare.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-47,Dermacore,https://dermacore.in/,Decision Maker,,Dermatology & Skincare,Pending,,,
-48,Dermaadvance,https://dermaadvance.in/,Decision Maker,,Dermatology & Skincare,Pending,,,
-49,Drshafaliyadav,https://www.drshafaliyadav.com/book-an-appointment,Decision Maker,,Dermatology & Skincare,Pending,,,
-50,Casaderma,https://www.casaderma.in/,Decision Maker,,Dermatology & Skincare,Pending,,,
-51,Clinicdermatech,https://www.clinicdermatech.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-52,Clinicaskinlko,https://www.clinicaskinlko.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-53,Vamasolution,http://www.vamasolution.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-54,Adgrohairgloskingomtinagar,https://adgrohairgloskingomtinagar.in/,Decision Maker,,Dermatology & Skincare,Pending,,,
-55,Dermapuritys,https://dermapuritys.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
-56,Lacutis,http://lacutis.in/,Decision Maker,,Dermatology & Skincare,Pending,,,
-57,Tenderpalm,https://www.tenderpalm.com/dr-sonali-saxena-best-dermatologist-and-skin-specialist-in-lucknow-india,Decision Maker,,Dermatology & Skincare,Pending,,,
-58,Refineskinclinic,https://refineskinclinic.co/,Decision Maker,,Dermatology & Skincare,Pending,,,
-59,Dermawellness,http://dermawellness.in/,Decision Maker,,Dermatology & Skincare,Pending,,,
-60,Maxhealthcare,https://www.maxhealthcare.in/doctor/dermatologists-in-lucknow,Decision Maker,,Dermatology & Skincare,Pending,,,
-61,Dermapathy,http://www.dermapathy.com/,Decision Maker,,Dermatology & Skincare,Pending,,,
+23,Skinspecialistinlucknow,https://www.skinspecialistinlucknow.com/chowk.php,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Skinspecialistinlucknow_Audit_Report_20261105_013924.pdf,Score: 4.6/10 | Dry-Run Simulation Active,2026-11-05 01:39:24
+24,Smtskinclinic,https://smtskinclinic.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Smtskinclinic_Audit_Report_20261105_013947.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:39:47
+25,Yuvaskinlasercentre,http://www.yuvaskinlasercentre.com/promod_agarwal.htm,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Yuvaskinlasercentre_Audit_Report_20261105_014013.pdf,Score: 3.6/10 | Dry-Run Simulation Active,2026-11-05 01:40:13
+26,Apollo247,https://www.apollo247.com/specialties,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Apollo247_Audit_Report_20261105_014045.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:40:45
+27,Apollocliniclucknow,https://apollocliniclucknow.com/clinic-services/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Apollocliniclucknow_Audit_Report_20261105_014108.pdf,Score: 4.6/10 | Dry-Run Simulation Active,2026-11-05 01:41:08
+28,Midlandhealthcare,https://midlandhealthcare.org/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Midlandhealthcare_Audit_Report_20261105_014132.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:41:32
+29,Kidneyfailure,http://www.kidneyfailure.co.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Kidneyfailure_Audit_Report_20261105_014159.pdf,Score: 6.4/10 | Dry-Run Simulation Active,2026-11-05 01:41:59
+30,Drjainhomeopathy,https://drjainhomeopathy.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Drjainhomeopathy_Audit_Report_20261105_014222.pdf,Score: 7.4/10 | Dry-Run Simulation Active,2026-11-05 01:42:22
+31,Theskinartclinic,https://www.theskinartclinic.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Theskinartclinic_Audit_Report_20261105_014246.pdf,Score: 7.4/10 | Dry-Run Simulation Active,2026-11-05 01:42:46
+32,Clinics,https://clinics.kaya.in/near-me/lucknow/Halwasiya-House/kaya-skin-hair-clinic-in-Halwasiya-House-lucknow--5jB5Yq/home,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Clinics_Audit_Report_20261105_014316.pdf,Score: 6.2/10 | Dry-Run Simulation Active,2026-11-05 01:43:16
+33,Dermaklinic,https://www.dermaklinic.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Dermaklinic_Audit_Report_20261105_014342.pdf,Score: 6.2/10 | Dry-Run Simulation Active,2026-11-05 01:43:42
+34,Glowlaserclinic,https://glowlaserclinic.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Glowlaserclinic_Audit_Report_20261105_014404.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:44:04
+35,Kaya,https://www.kaya.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Kaya_Audit_Report_20261105_014429.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:44:29
+36,Dermaxskincliniclucknow,https://dermaxskincliniclucknow.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Dermaxskincliniclucknow_Audit_Report_20261105_014457.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:44:57
+37,Skinhairlaser,https://skinhairlaser.co/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Skinhairlaser_Audit_Report_20261105_014519.pdf,Score: 7.8/10 | Dry-Run Simulation Active,2026-11-05 01:45:19
+38,Drvipulgupta,https://www.drvipulgupta.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Drvipulgupta_Audit_Report_20261105_014545.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:45:45
+39,Clinics,https://clinics.drbatras.com/lucknow/homeopathy-clinic-ashok-marg.php,Decision Maker,,Dermatology & Skincare,Completed (Email Skipped),C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Clinics_Audit_Report_20261105_014611.pdf,Score: 6.2/10 | Duplicate Prevented,2026-11-05 01:46:11
+40,Drjpagrawal,https://drjpagrawal.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Drjpagrawal_Audit_Report_20261105_014636.pdf,Score: 6.2/10 | Dry-Run Simulation Active,2026-11-05 01:46:36
+41,Talwarskincentre,https://www.talwarskincentre.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Talwarskincentre_Audit_Report_20261105_014712.pdf,Score: 6.2/10 | Dry-Run Simulation Active,2026-11-05 01:47:12
+42,Drlinki,https://drlinki.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Drlinki_Audit_Report_20261105_014735.pdf,Score: 7.4/10 | Dry-Run Simulation Active,2026-11-05 01:47:35
+43,Twachaklinic,http://www.twachaklinic.in.net/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Twachaklinic_Audit_Report_20261105_014803.pdf,Score: 5.2/10 | Dry-Run Simulation Active,2026-11-05 01:48:03
+44,Sites,https://sites.google.com/view/jayshreeskinclinic,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Sites_Audit_Report_20261105_014827.pdf,Score: 6.2/10 | Dry-Run Simulation Active,2026-11-05 01:48:28
+45,Drrizvicosmeticdermatology,https://drrizvicosmeticdermatology.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Drrizvicosmeticdermatology_Audit_Report_20261105_014848.pdf,Score: 5.6/10 | Dry-Run Simulation Active,2026-11-05 01:48:48
+46,Shreeaestheticskincare,https://shreeaestheticskincare.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Shreeaestheticskincare_Audit_Report_20261105_014910.pdf,Score: 4.6/10 | Dry-Run Simulation Active,2026-11-05 01:49:10
+47,Dermacore,https://dermacore.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Dermacore_Audit_Report_20261105_014945.pdf,Score: 6.2/10 | Dry-Run Simulation Active,2026-11-05 01:49:45
+48,Dermaadvance,https://dermaadvance.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Dermaadvance_Audit_Report_20261105_015015.pdf,Score: 6.2/10 | Dry-Run Simulation Active,2026-11-05 01:50:15
+49,Drshafaliyadav,https://www.drshafaliyadav.com/book-an-appointment,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Drshafaliyadav_Audit_Report_20261105_015042.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:50:42
+50,Casaderma,https://www.casaderma.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Casaderma_Audit_Report_20261105_015109.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:51:09
+51,Clinicdermatech,https://www.clinicdermatech.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Clinicdermatech_Audit_Report_20261105_015135.pdf,Score: 7.4/10 | Dry-Run Simulation Active,2026-11-05 01:51:35
+52,Clinicaskinlko,https://www.clinicaskinlko.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Clinicaskinlko_Audit_Report_20261105_015210.pdf,Score: 6.2/10 | Dry-Run Simulation Active,2026-11-05 01:52:10
+53,Vamasolution,http://www.vamasolution.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Vamasolution_Audit_Report_20261105_015235.pdf,Score: 5.8/10 | Dry-Run Simulation Active,2026-11-05 01:52:35
+54,Adgrohairgloskingomtinagar,https://adgrohairgloskingomtinagar.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Adgrohairgloskingomtinagar_Audit_Report_20261105_015258.pdf,Score: 7.2/10 | Dry-Run Simulation Active,2026-11-05 01:52:58
+55,Dermapuritys,https://dermapuritys.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Dermapuritys_Audit_Report_20261105_015322.pdf,Score: 7.2/10 | Dry-Run Simulation Active,2026-11-05 01:53:22
+56,Lacutis,http://lacutis.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Lacutis_Audit_Report_20261105_015348.pdf,Score: 5.2/10 | Dry-Run Simulation Active,2026-11-05 01:53:48
+57,Tenderpalm,https://www.tenderpalm.com/dr-sonali-saxena-best-dermatologist-and-skin-specialist-in-lucknow-india,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Tenderpalm_Audit_Report_20261105_015411.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:54:11
+58,Refineskinclinic,https://refineskinclinic.co/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Refineskinclinic_Audit_Report_20261105_015436.pdf,Score: 6.8/10 | Dry-Run Simulation Active,2026-11-05 01:54:36
+59,Dermawellness,http://dermawellness.in/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Dermawellness_Audit_Report_20261105_015502.pdf,Score: 5.2/10 | Dry-Run Simulation Active,2026-11-05 01:55:02
+60,Maxhealthcare,https://www.maxhealthcare.in/doctor/dermatologists-in-lucknow,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Maxhealthcare_Audit_Report_20261105_015524.pdf,Score: 5.2/10 | Dry-Run Simulation Active,2026-11-05 01:55:24
+61,Dermapathy,http://www.dermapathy.com/,Decision Maker,,Dermatology & Skincare,Completed,C:\Users\Madhav\OneDrive\PROJECTS\Langgraph_Website_Automation\reports\Dermapathy_Audit_Report_20261105_015545.pdf,Score: 4.6/10 | Dry-Run Simulation Active,2026-11-05 01:55:45

@@ -49,7 +49,19 @@ def scrape_single_page(url: str, session: requests.Session) -> Dict[str, Any]:
                 "title": "",
                 "meta_description": "",
                 "has_viewport": False,
+                "has_schema": False,
+                "has_canonical": False,
                 "headings": [],
+                "h1_tags": [],
+                "cta_buttons": [],
+                "phone_links": [],
+                "email_links": [],
+                "whatsapp_links": [],
+                "social_links": [],
+                "has_faq": False,
+                "images_total": 0,
+                "images_missing_alt": 0,
+                "form_count": 0,
                 "text": "",
                 "internal_links": []
             }
@@ -69,7 +81,40 @@ def scrape_single_page(url: str, session: requests.Session) -> Dict[str, Any]:
         viewport_tag = soup.find("meta", attrs={"name": "viewport"})
         has_viewport = bool(viewport_tag)
 
+        # Technical SEO signals
+        import re
+        has_schema = bool(soup.find("script", attrs={"type": re.compile(r"ld\+json", re.I)}))
+        has_canonical = bool(soup.find("link", attrs={"rel": "canonical"}))
+
+        # Contact and conversion signals
+        phone_links = [a["href"].strip() for a in soup.find_all("a", href=True) if a["href"].strip().lower().startswith("tel:")]
+        email_links = [a["href"].strip() for a in soup.find_all("a", href=True) if a["href"].strip().lower().startswith("mailto:")]
+        whatsapp_links = [a["href"].strip() for a in soup.find_all("a", href=True) if any(w in a["href"].lower() for w in ["wa.me", "whatsapp"])]
+        social_links = [a["href"].strip() for a in soup.find_all("a", href=True) if any(s in a["href"].lower() for s in ["instagram.com", "facebook.com", "youtube.com", "linkedin.com", "twitter.com", "x.com"])]
+
+        # CTA Buttons
+        cta_buttons = []
+        for el in soup.find_all(["button", "a"]):
+            t = el.get_text(strip=True)
+            if t and any(cta in t.lower() for cta in ["book", "appointment", "consult", "call now", "contact", "enquire", "get in touch"]):
+                if t not in cta_buttons and len(t) < 40:
+                    cta_buttons.append(t)
+        cta_buttons = cta_buttons[:6]
+
+        # Images & Alt tags
+        all_imgs = soup.find_all("img")
+        images_total = len(all_imgs)
+        images_missing_alt = len([img for img in all_imgs if not img.get("alt") or not str(img.get("alt")).strip()])
+
+        # Forms
+        form_count = len(soup.find_all("form"))
+
+        # FAQ signal
+        page_html_lower = resp.text.lower()
+        has_faq = any(f in page_html_lower for f in ["faq", "frequently asked", "common questions"])
+
         # Headings (H1, H2, H3)
+        h1_tags = [h.get_text(strip=True) for h in soup.find_all("h1") if h.get_text(strip=True)]
         headings: List[str] = []
         for h in soup.find_all(["h1", "h2", "h3"]):
             txt = h.get_text(strip=True)
@@ -105,7 +150,19 @@ def scrape_single_page(url: str, session: requests.Session) -> Dict[str, Any]:
             "title": title,
             "meta_description": meta_desc,
             "has_viewport": has_viewport,
+            "has_schema": has_schema,
+            "has_canonical": has_canonical,
             "headings": headings[:15],
+            "h1_tags": h1_tags[:5],
+            "cta_buttons": cta_buttons,
+            "phone_links": phone_links,
+            "email_links": email_links,
+            "whatsapp_links": whatsapp_links,
+            "social_links": social_links,
+            "has_faq": has_faq,
+            "images_total": images_total,
+            "images_missing_alt": images_missing_alt,
+            "form_count": form_count,
             "text": body_text[:4000],  # Bound text length for Ollama token limit
             "internal_links": internal_links[:10]
         }
@@ -120,7 +177,19 @@ def scrape_single_page(url: str, session: requests.Session) -> Dict[str, Any]:
             "title": "",
             "meta_description": "",
             "has_viewport": False,
+            "has_schema": False,
+            "has_canonical": False,
             "headings": [],
+            "h1_tags": [],
+            "cta_buttons": [],
+            "phone_links": [],
+            "email_links": [],
+            "whatsapp_links": [],
+            "social_links": [],
+            "has_faq": False,
+            "images_total": 0,
+            "images_missing_alt": 0,
+            "form_count": 0,
             "text": "",
             "internal_links": []
         }
@@ -174,6 +243,17 @@ def scrape_website_node(state: AutomationState) -> Dict[str, Any]:
         if pages_data else 0.0
     )
 
+    # Aggregated signals
+    service_links = [
+        u for p in pages_data for u in p.get("internal_links", [])
+        if any(w in u.lower() for w in ["service", "treatment", "procedure", "specialty", "skin", "hair", "laser", "care"])
+    ]
+    all_socials = list(dict.fromkeys([s for p in pages_data for s in p.get("social_links", [])]))
+    all_phones = list(dict.fromkeys([ph for p in pages_data for ph in p.get("phone_links", [])]))
+    all_whatsapps = list(dict.fromkeys([w for p in pages_data for w in p.get("whatsapp_links", [])]))
+    all_emails = list(dict.fromkeys([e for p in pages_data for e in p.get("email_links", [])]))
+    all_ctas = list(dict.fromkeys([c for p in pages_data for c in p.get("cta_buttons", [])]))
+
     scraped_payload = {
         "base_url": base_url,
         "page_count": len(pages_data),
@@ -183,7 +263,20 @@ def scrape_website_node(state: AutomationState) -> Dict[str, Any]:
         "homepage_title": home_page.get("title", ""),
         "homepage_meta": home_page.get("meta_description", ""),
         "has_viewport": home_page.get("has_viewport", False),
+        "has_schema": any(p.get("has_schema") for p in pages_data),
+        "has_canonical": any(p.get("has_canonical") for p in pages_data),
+        "has_faq": any(p.get("has_faq") for p in pages_data),
+        "social_links": all_socials,
+        "phone_links": all_phones,
+        "whatsapp_links": all_whatsapps,
+        "email_links": all_emails,
+        "cta_buttons": all_ctas,
+        "service_links_count": len(service_links),
+        "images_total": sum(p.get("images_total", 0) for p in pages_data),
+        "images_missing_alt": sum(p.get("images_missing_alt", 0) for p in pages_data),
+        "form_count": sum(p.get("form_count", 0) for p in pages_data),
         "status_code": home_page.get("status_code", 0),
+        "has_https": base_url.startswith("https://"),
         "error": home_page.get("error")
     }
 

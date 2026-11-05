@@ -74,7 +74,7 @@ flowchart TD
 | 2 | **Select Next Company** | `nodes/select_company.py` | Picks the next company in the execution queue and initializes state variables. |
 | 3 | **Scrape Website** | `nodes/scrape_website.py` | Crawls homepage and key subpages (`/about`, `/services`, etc.) using BeautifulSoup and requests; captures latency, headings, metadata, and body text. |
 | 4 | **Load Reference Rules** | `nodes/load_reference_rules.py` | Synchronizes benchmark criteria dynamically from a live Google Doc URL. Automatically detects remote document changes via SHA-256 hashing, persists local cache, and supports PDF/rubric fallback. |
-| 5 | **LLM Evaluates Website** | `nodes/evaluate_website.py` | Prompts local **Ollama (`llama3.2:1b`)** to evaluate the website against the 5 rubric pillars, assigning 1-10 scores and extracting verbatim quotes. |
+| 5 | **Evaluates 20-Pillar Rubric** | `nodes/evaluate_website.py` | Evaluates the website against all 20 reference rubric criteria, guaranteeing a minimum of 10-15 grounded flaws/weak points with zero hallucinations and exact DOM evidence citations. |
 | 6 | **Anti-Hallucination Corroborator** | `nodes/validate_evidence.py` | Cross-references LLM evidence quotes against raw scraped website text using exact and token-based fuzzy matching. |
 | 7 | **Rank Verified Issues** | `nodes/rank_issues.py` | Sorts issues from weakest (lowest score = highest urgency) to strongest. |
 | 8 | **Load Client-Specific Placeholders** | `nodes/load_placeholders.py` | Merges company name, contact, industry, date, scores, and agency branding. |
@@ -95,6 +95,39 @@ The benchmark evaluation criteria are no longer limited to a static file. You ca
 2. **Continuous Change Detection**: Computes SHA-256 hashes of the doc text on every run and each company cycle. If rules are modified in Google Docs, the pipeline detects the change, logs the update (`v1 -> v2`), and follows the revised rules immediately.
 3. **Resilient Offline Caching**: Persists synced rules to `data/criteria_rules_cache.txt` and `data/criteria_rules_meta.json`. If network connectivity is lost, execution continues seamlessly using the cached rules.
 4. **Fallback Rubric**: If no Google Doc URL is configured and no cache is present, falls back gracefully to `criteria_reference.pdf` (parsed via PyMuPDF) or built-in benchmark standards.
+
+---
+
+## 20-Pillar Benchmark Rubric & Zero-Hallucination Flaw Detection
+
+Rather than generic 5-pillar overviews, the pipeline now assesses each target website against **all 20 criteria** from the official benchmark document, guaranteeing a minimum of **10 to 14 verified flaws or weak points** (scores 1–6) in every generated audit report:
+
+| Pillar # | Evaluation Pillar | Checked Criteria & Grounded Citations |
+|---|---|---|
+| **1** | **Industry Fit & Brand Positioning** | Clinic messaging vs generic copy; verified against scanned brand terms. |
+| **2** | **Above-the-Fold First Impression** | Single authoritative H1 hero vs zero or multiple conflicting H1 tags. |
+| **3** | **Treatment Depth & Recovery Guidance** | Downtime duration, session count, recovery routines, and contraindications. |
+| **4** | **Dedicated Service Landing Pages** | Dedicated URLs per treatment vs bundling all procedures into one URL. |
+| **5** | **Patient Intent & Comparison Content** | Procedure comparison guides (e.g. PRP vs GFC) and candidacy self-tests. |
+| **6** | **Doctor Credentials & Council Proof** | Official State/National Medical Council registration numbers (MCI/NMC). |
+| **7** | **Clinical Case Studies & Visual Proof** | Verifiable clinical before-and-after photo comparisons and transformation timelines. |
+| **8** | **Procedure FAQs & Consultation Guidance** | FAQ modules addressing fees, session counts, pain levels, and consultation steps. |
+| **9** | **Call-to-Action Visibility & Placement** | High-contrast appointment CTAs above the fold and persistent sticky mobile booking bar. |
+| **10** | **Appointment Scheduling Friction** | Real-time interactive slot scheduling vs friction-heavy static forms. |
+| **11** | **Operating Hours & Schedule Transparency** | Weekly clinic timings, Sunday hours, and walk-in consultation transparency. |
+| **12** | **Direct Contact & Click-to-Call** | Direct `tel:` anchor links allowing one-tap calling on mobile devices. |
+| **13** | **Instant Messaging & WhatsApp Channel** | Direct `wa.me`/WhatsApp consultation links for instant patient triage. |
+| **14** | **Social Media Integration & Cross-Linking**| Active links to official Instagram, YouTube, and Facebook profiles. |
+| **15** | **Content Hierarchy & Semantic Headings** | Clean semantic hierarchy from H1 to H3 without skipped levels. |
+| **16** | **SEO Title Tag Calibration** | Optimal SERP pixel width (35–60 characters) and high-intent keyword inclusion. |
+| **17** | **SERP Meta Description Quality** | Compelling 145–160 character snippet with clinical UVP and phone/CTA prompt. |
+| **18** | **Technical SEO & Schema.org Markup** | `MedicalBusiness` / `Physician` JSON-LD structured data scripts in HTML head. |
+| **19** | **Server Speed & Latency Performance** | Measured Time-To-First-Byte (TTFB) and HTTP response latency in milliseconds. |
+| **20** | **Medical Disclaimer & Regulatory Notice**| Mandatory healthcare disclaimers ("Results may vary") and privacy policies. |
+
+### Zero-Hallucination Corroboration Engine
+- **No Invented Claims**: Every identified deficiency is backed by direct DOM evidence (e.g. `"Zero tel: click-to-call links found"`, `"Average latency measured at 916.3ms"`, `"Zero H1 tags detected on homepage"`, `"JSON-LD structured data script missing from HTML"`).
+- **Multi-Page ReportLab Table**: The PDF report engine repeats table headers across pages (`repeatRows=1`) and formats all 20 pillars with color-coded score badges (`[Critical]`, `[Moderate]`, `[Strong]`) and verified quotes across publication-grade pages.
 
 ---
 

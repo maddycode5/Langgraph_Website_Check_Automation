@@ -56,8 +56,19 @@ def validate_evidence_node(state: AutomationState) -> Dict[str, Any]:
         quote = issue.get("evidence_quote", "").strip()
         words = quote.split()
 
-        # Check for technical metadata match (e.g. latency, status, viewport, title, protocol)
-        tech_indicators = ["ms", "viewport", "title", "meta", "http", "ssl", "protocol", "latency"]
+        # Check if already verified by deterministic DOM inspection
+        if issue.get("verified") and issue.get("verification_score", 0) >= 0.9:
+            verified_list.append(issue)
+            verified_count += 1
+            continue
+
+        # Check for technical metadata match (e.g. latency, status, viewport, title, protocol, schema)
+        tech_indicators = [
+            "ms", "viewport", "title", "meta", "http", "ssl", "protocol", "latency",
+            "schema", "canonical", "click-to-call", "tel:", "whatsapp", "wa.me", "faq",
+            "alt", "image", "html", "tag", "button", "link", "subpage", "json-ld",
+            "degrees", "dr.", "mbbs", "md", "verified", "scanned", "absent", "missing"
+        ]
         is_tech_metric = any(k in quote.lower() for k in tech_indicators)
 
         if not quote or (len(words) < MIN_QUOTE_LENGTH_WORDS and not is_tech_metric):

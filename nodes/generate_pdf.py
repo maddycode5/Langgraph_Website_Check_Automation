@@ -212,22 +212,22 @@ def generate_pdf_node(state: AutomationState) -> Dict[str, Any]:
     story.append(Spacer(1, 10))
 
     # Detailed Verified Issues Table (Ranked Weakest to Strongest)
-    story.append(Paragraph("Verified Pillar Breakdown (Ranked by Criticality)", h2_style))
+    story.append(Paragraph("Top 10+ Critical Flaws & Benchmark Findings (Ranked by Criticality)", h2_style))
 
     table_rows = [
         [
-            Paragraph("Evaluation Pillar", bold_label),
+            Paragraph("Audit Pillar", bold_label),
             Paragraph("Score", bold_label),
-            Paragraph("Key Findings & Recommendations", bold_label),
-            Paragraph("Corroborated Evidence Quote", bold_label)
+            Paragraph("Identified Flaw & Strategic Recommendation", bold_label),
+            Paragraph("Grounded Technical Evidence", bold_label)
         ]
     ]
 
     for item in ranked_issues:
         badge = get_score_badge(item["score"])
-        v_tag = "<font size=7 color='#059669'>[Verified Quote]</font>" if item.get("verified") else "<font size=7 color='#DC2626'>[Unconfirmed]</font>"
+        v_tag = "<font size=7 color='#059669'>[Verified Ground Truth]</font>" if item.get("verified") else "<font size=7 color='#DC2626'>[Unconfirmed]</font>"
         finding_para = Paragraph(
-            f"<b>Findings:</b> {item['findings']}<br/>"
+            f"<b>Flaw / Finding:</b> {item['findings']}<br/>"
             f"<b>Recommendation:</b> {item['recommendation']}",
             body_style
         )
@@ -242,16 +242,16 @@ def generate_pdf_node(state: AutomationState) -> Dict[str, Any]:
             evidence_para
         ])
 
-    t_breakdown = Table(table_rows, colWidths=[110, 60, 204, 130])
+    t_breakdown = Table(table_rows, colWidths=[110, 60, 204, 130], repeatRows=1)
     t_breakdown.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#0F172A')),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
         ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
         ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-        ('LEFTPADDING', (0, 0), (-1, -1), 6),
-        ('RIGHTPADDING', (0, 0), (-1, -1), 6),
-        ('TOPPADDING', (0, 0), (-1, -1), 6),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+        ('LEFTPADDING', (0, 0), (-1, -1), 5),
+        ('RIGHTPADDING', (0, 0), (-1, -1), 5),
+        ('TOPPADDING', (0, 0), (-1, -1), 4),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
         ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#F8FAFC')]),
         ('BOX', (0, 0), (-1, -1), 0.5, colors.HexColor('#CBD5E1')),
         ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#E2E8F0')),
