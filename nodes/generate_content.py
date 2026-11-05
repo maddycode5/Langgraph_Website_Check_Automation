@@ -48,14 +48,14 @@ def generate_content_node(state: AutomationState) -> Dict[str, Any]:
 
     critical_fixes: List[str] = [
         f"{issue['category']} (Score: {issue['score']}/10): {issue['recommendation']}"
-        for issue in ranked if issue['score'] <= 6
+        for issue in ranked if issue['score'] < 8
     ]
     if not critical_fixes and ranked:
         critical_fixes = [f"{ranked[0]['category']}: {ranked[0]['recommendation']}"]
 
     top_strengths: List[str] = [
         f"{issue['category']} (Score: {issue['score']}/10): {issue['findings']}"
-        for issue in reversed(ranked) if issue['score'] >= 7
+        for issue in reversed(ranked) if issue['score'] >= 8
     ]
     if not top_strengths and ranked:
         top_strengths = [f"{ranked[-1]['category']}: Performing at baseline expectations."]
@@ -63,8 +63,10 @@ def generate_content_node(state: AutomationState) -> Dict[str, Any]:
     # Default robust content synthesis
     exec_summary = (
         f"A comprehensive 20-pillar performance and conversion audit was conducted for {company_name} "
-        f"in the {industry} sector based on standardized criteria guidelines. Across the evaluated criteria, {company_name} achieved "
-        f"a composite rating of {overall_score} out of 10. The audit verified {len(critical_fixes)} primary flaws and conversion vulnerabilities, "
+        f"in the {industry} sector based on standardized criteria guidelines. All dimensions were evaluated on an objective "
+        f"1 to 10 scale categorized across 4 benchmark alignment tiers: Strengths (scores 8–10), Less Aligned (scores 6–7), "
+        f"Least Aligned (scores 3–5), and Worst (scores 1–2). Across all evaluated criteria, {company_name} achieved "
+        f"a composite rating of {overall_score} out of 10. The audit verified {len(critical_fixes)} prioritized optimization targets, "
         f"with the most critical constraint identified in '{weakest['category']}' (scoring {weakest['score']}/10). "
         f"Executing the prioritized recommendations detailed in this report will eliminate user friction, protect search visibility, and increase qualified client inquiries."
     )

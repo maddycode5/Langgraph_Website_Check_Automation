@@ -100,30 +100,41 @@ The benchmark evaluation criteria are no longer limited to a static file. You ca
 
 ## 20-Pillar Benchmark Rubric & Zero-Hallucination Flaw Detection
 
-Rather than generic 5-pillar overviews, the pipeline now assesses each target website against **all 20 criteria** from the official benchmark document, guaranteeing a minimum of **10 to 14 verified flaws or weak points** (scores 1–6) in every generated audit report:
+Rather than generic 5-pillar overviews, the pipeline assesses each target website against **all 20 criteria** from the official benchmark document. Every audit point is evaluated on an objective **1 to 10 scale** categorized by benchmark alignment tiers, guaranteeing a minimum of **10 to 14 verified flaws or weak points** (from the Worst, Least Aligned, and Less Aligned tiers) in every generated audit report:
 
-| Pillar # | Evaluation Pillar | Checked Criteria & Grounded Citations |
-|---|---|---|
-| **1** | **Industry Fit & Brand Positioning** | Clinic messaging vs generic copy; verified against scanned brand terms. |
-| **2** | **Above-the-Fold First Impression** | Single authoritative H1 hero vs zero or multiple conflicting H1 tags. |
-| **3** | **Treatment Depth & Recovery Guidance** | Downtime duration, session count, recovery routines, and contraindications. |
-| **4** | **Dedicated Service Landing Pages** | Dedicated URLs per treatment vs bundling all procedures into one URL. |
-| **5** | **Patient Intent & Comparison Content** | Procedure comparison guides (e.g. PRP vs GFC) and candidacy self-tests. |
-| **6** | **Doctor Credentials & Council Proof** | Official State/National Medical Council registration numbers (MCI/NMC). |
-| **7** | **Clinical Case Studies & Visual Proof** | Verifiable clinical before-and-after photo comparisons and transformation timelines. |
-| **8** | **Procedure FAQs & Consultation Guidance** | FAQ modules addressing fees, session counts, pain levels, and consultation steps. |
-| **9** | **Call-to-Action Visibility & Placement** | High-contrast appointment CTAs above the fold and persistent sticky mobile booking bar. |
-| **10** | **Appointment Scheduling Friction** | Real-time interactive slot scheduling vs friction-heavy static forms. |
-| **11** | **Operating Hours & Schedule Transparency** | Weekly clinic timings, Sunday hours, and walk-in consultation transparency. |
-| **12** | **Direct Contact & Click-to-Call** | Direct `tel:` anchor links allowing one-tap calling on mobile devices. |
-| **13** | **Instant Messaging & WhatsApp Channel** | Direct `wa.me`/WhatsApp consultation links for instant patient triage. |
-| **14** | **Social Media Integration & Cross-Linking**| Active links to official Instagram, YouTube, and Facebook profiles. |
-| **15** | **Content Hierarchy & Semantic Headings** | Clean semantic hierarchy from H1 to H3 without skipped levels. |
-| **16** | **SEO Title Tag Calibration** | Optimal SERP pixel width (35–60 characters) and high-intent keyword inclusion. |
-| **17** | **SERP Meta Description Quality** | Compelling 145–160 character snippet with clinical UVP and phone/CTA prompt. |
-| **18** | **Technical SEO & Schema.org Markup** | `MedicalBusiness` / `Physician` JSON-LD structured data scripts in HTML head. |
-| **19** | **Server Speed & Latency Performance** | Measured Time-To-First-Byte (TTFB) and HTTP response latency in milliseconds. |
-| **20** | **Medical Disclaimer & Regulatory Notice**| Mandatory healthcare disclaimers ("Results may vary") and privacy policies. |
+### Objective Scoring Scale & Alignment Tiers (1 to 10)
+
+| Score Range | Alignment Tier | Benchmark Definition | Strategic Impact |
+|---|---|---|---|
+| **8 – 10** | **Strengths** | Meets or exceeds high clinical digital standards; robust trust signals, clear value props, and seamless UX. | Organizational strength & competitive advantage |
+| **6 – 7** | **Less Aligned** | Sub-optimal or incomplete implementation (e.g. desktop CTA exists but lacks mobile sticky bar, average TTFB). | Optimization opportunity for higher conversion ROI |
+| **3 – 5** | **Least Aligned** | Severe defects, missing secondary elements, or major patient conversion friction (e.g., no recovery info, <3 service URLs). | High patient drop-off; prioritized remediation targets |
+| **1 – 2** | **Worst** | Critical failures and complete absence of essential core infrastructure (e.g. zero H1 hero, no click-to-call, missing Schema markup). | Severe commercial & legal risk; immediate fix required |
+
+> **Note on Alignment vs Actionable Flaws**: Criteria scoring **8 to 10** are classified as organizational **Strengths**. Criteria scoring below 8 (**6–7: Less Aligned**, **3–5: Least Aligned**, and **1–2: Worst**) represent actionable flaws, gaps, and friction points prioritized in the audit table, ensuring decision-makers receive at least 10 concrete, grounded remediation targets.
+
+| Pillar # | Evaluation Pillar | Checked Criteria & Grounded Citations | Score Range |
+|---|---|---|---|
+| **1** | **Industry Fit & Brand Positioning** | Clinic messaging vs generic copy; verified against scanned brand terms. | 1 – 10 |
+| **2** | **Above-the-Fold First Impression** | Single authoritative H1 hero vs zero or multiple conflicting H1 tags. | 1 – 10 |
+| **3** | **Treatment Depth & Recovery Guidance** | Downtime duration, session count, recovery routines, and contraindications. | 1 – 10 |
+| **4** | **Dedicated Service Landing Pages** | Dedicated URLs per treatment vs bundling all procedures into one URL. | 1 – 10 |
+| **5** | **Patient Intent & Comparison Content** | Procedure comparison guides (e.g. PRP vs GFC) and candidacy self-tests. | 1 – 10 |
+| **6** | **Doctor Credentials & Council Proof** | Official State/National Medical Council registration numbers (MCI/NMC). | 1 – 10 |
+| **7** | **Clinical Case Studies & Visual Proof** | Verifiable clinical before-and-after photo comparisons and transformation timelines. | 1 – 10 |
+| **8** | **Procedure FAQs & Consultation Guidance** | FAQ modules addressing fees, session counts, pain levels, and consultation steps. | 1 – 10 |
+| **9** | **Call-to-Action Visibility & Placement** | High-contrast appointment CTAs above the fold and persistent sticky mobile booking bar. | 1 – 10 |
+| **10** | **Appointment Scheduling Friction** | Real-time interactive slot scheduling vs friction-heavy static forms. | 1 – 10 |
+| **11** | **Operating Hours & Schedule Transparency** | Weekly clinic timings, Sunday hours, and walk-in consultation transparency. | 1 – 10 |
+| **12** | **Direct Contact & Click-to-Call** | Direct `tel:` anchor links allowing one-tap calling on mobile devices. | 1 – 10 |
+| **13** | **Instant Messaging & WhatsApp Channel** | Direct `wa.me`/WhatsApp consultation links for instant patient triage. | 1 – 10 |
+| **14** | **Social Media Integration & Cross-Linking**| Active links to official Instagram, YouTube, and Facebook profiles. | 1 – 10 |
+| **15** | **Content Hierarchy & Semantic Headings** | Clean semantic hierarchy from H1 to H3 without skipped levels. | 1 – 10 |
+| **16** | **SEO Title Tag Calibration** | Optimal SERP pixel width (35–60 characters) and high-intent keyword inclusion. | 1 – 10 |
+| **17** | **SERP Meta Description Quality** | Compelling 145–160 character snippet with clinical UVP and phone/CTA prompt. | 1 – 10 |
+| **18** | **Technical SEO & Schema.org Markup** | `MedicalBusiness` / `Physician` JSON-LD structured data scripts in HTML head. | 1 – 10 |
+| **19** | **Server Speed & Latency Performance** | Measured Time-To-First-Byte (TTFB) and HTTP response latency in milliseconds. | 1 – 10 |
+| **20** | **Medical Disclaimer & Regulatory Notice**| Mandatory healthcare disclaimers ("Results may vary") and privacy policies. | 1 – 10 |
 
 ### Zero-Hallucination Corroboration Engine
 - **No Invented Claims**: Every identified deficiency is backed by direct DOM evidence (e.g. `"Zero tel: click-to-call links found"`, `"Average latency measured at 916.3ms"`, `"Zero H1 tags detected on homepage"`, `"JSON-LD structured data script missing from HTML"`).

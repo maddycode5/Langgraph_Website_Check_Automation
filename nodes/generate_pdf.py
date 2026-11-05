@@ -1,6 +1,7 @@
 """Node 10: Generate PDF (ReportLab Publication-Grade)
 Produces a publication-grade, professionally styled digital audit report PDF.
 """
+import html
 import re
 import sys
 from pathlib import Path
@@ -64,13 +65,15 @@ class NumberedCanvas(canvas.Canvas):
 
 
 def get_score_badge(score: int) -> str:
-    """Returns color-coded score label."""
+    """Returns color-coded score label categorized by benchmark alignment tiers."""
     if score >= 8:
-        return f'<font color="#059669"><b>{score}/10 [Strong]</b></font>'
-    elif score >= 5:
-        return f'<font color="#D97706"><b>{score}/10 [Moderate]</b></font>'
+        return f'<font color="#059669"><b>{score}/10 [Strength]</b></font>'
+    elif score >= 6:
+        return f'<font color="#D97706"><b>{score}/10 [Less Aligned]</b></font>'
+    elif score >= 3:
+        return f'<font color="#EA580C"><b>{score}/10 [Least Aligned]</b></font>'
     else:
-        return f'<font color="#DC2626"><b>{score}/10 [Critical]</b></font>'
+        return f'<font color="#DC2626"><b>{score}/10 [Worst]</b></font>'
 
 
 def generate_pdf_node(state: AutomationState) -> Dict[str, Any]:
@@ -187,7 +190,7 @@ def generate_pdf_node(state: AutomationState) -> Dict[str, Any]:
 
     kpi_card_data = [
         [
-            Paragraph(f"<font size=18><b>{score_str}</b></font><br/><font size=8 color='#475569'>COMPOSITE SCORE</font>", ParagraphStyle('ScoreCenter', parent=body_style, alignment=1)),
+            Paragraph(f"<font size=18><b>{score_str}</b></font><br/><font size=8 color='#475569'>COMPOSITE SCORE (SCALE: 1 - 10)</font>", ParagraphStyle('ScoreCenter', parent=body_style, alignment=1)),
             Paragraph(f"<b>Primary Bottleneck:</b> {placeholders.get('weakest_area')} ({placeholders.get('weakest_score')}/10)<br/>"
                       f"<b>Strongest Asset:</b> {placeholders.get('strongest_area')} ({placeholders.get('strongest_score')}/10)<br/>"
                       f"<b>Anti-Hallucination Status:</b> Verified against DOM & multi-page crawl", body_style)
@@ -213,11 +216,20 @@ def generate_pdf_node(state: AutomationState) -> Dict[str, Any]:
 
     # Detailed Verified Issues Table (Ranked Weakest to Strongest)
     story.append(Paragraph("Top 10+ Critical Flaws & Benchmark Findings (Ranked by Criticality)", h2_style))
+    story.append(Paragraph(
+        "<font size=7 color='#64748B'><b>Benchmark Alignment (Scale 1 to 10):</b> "
+        "<b>1–2: Worst</b> (Critical Failure) &nbsp;|&nbsp; "
+        "<b>3–5: Least Aligned</b> (Severe Defect / Flaw) &nbsp;|&nbsp; "
+        "<b>6–7: Less Aligned</b> (Moderate Gap) &nbsp;|&nbsp; "
+        "<b>8–10: Strengths</b> (Fully Aligned Standard)</font>",
+        body_style
+    ))
+    story.append(Spacer(1, 4))
 
     table_rows = [
         [
             Paragraph("Audit Pillar", bold_label),
-            Paragraph("Score", bold_label),
+            Paragraph("Score (1-10)", bold_label),
             Paragraph("Identified Flaw & Strategic Recommendation", bold_label),
             Paragraph("Grounded Technical Evidence", bold_label)
         ]
@@ -226,17 +238,21 @@ def generate_pdf_node(state: AutomationState) -> Dict[str, Any]:
     for item in ranked_issues:
         badge = get_score_badge(item["score"])
         v_tag = "<font size=7 color='#059669'>[Verified Ground Truth]</font>" if item.get("verified") else "<font size=7 color='#DC2626'>[Unconfirmed]</font>"
+        clean_finding = html.escape(str(item.get('findings', '')))
+        clean_rec = html.escape(str(item.get('recommendation', '')))
+        clean_evidence = html.escape(str(item.get('evidence_quote', '')[:140]))
+        category_label = html.escape(str(item.get('category', 'Audit Pillar')))
         finding_para = Paragraph(
-            f"<b>Flaw / Finding:</b> {item['findings']}<br/>"
-            f"<b>Recommendation:</b> {item['recommendation']}",
+            f"<b>Flaw / Finding:</b> {clean_finding}<br/>"
+            f"<b>Recommendation:</b> {clean_rec}",
             body_style
         )
         evidence_para = Paragraph(
-            f"<i>\"{item['evidence_quote'][:140]}\"</i><br/>{v_tag}",
+            f"<i>\"{clean_evidence}\"</i><br/>{v_tag}",
             callout_style
         )
         table_rows.append([
-            Paragraph(f"<b>{item['category']}</b>", body_style),
+            Paragraph(f"<b>{category_label}</b>", body_style),
             Paragraph(badge, body_style),
             finding_para,
             evidence_para

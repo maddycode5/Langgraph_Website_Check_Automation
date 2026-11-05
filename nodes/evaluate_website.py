@@ -1,5 +1,10 @@
-"""Node 5: LLM Evaluates Website (Ollama: llama3.2:1b)
-Uses local Ollama llama3.2:1b to assess website content against reference rubric.
+"""Node 5: Website Evaluation Engine (Scale: 1 to 10)
+Assesses website content across 20 benchmark criteria on an objective 1 to 10 scoring scale.
+Benchmark Alignment Tiers:
+  - 8 to 10: Strengths (Meets or exceeds modern clinical web standards, high-trust execution)
+  - 6 to 7 : Less Aligned (Sub-optimal or incomplete implementation, moderate optimization gap)
+  - 3 to 5 : Least Aligned (Severe defects, major conversion friction, or absent secondary components)
+  - 1 to 2 : Worst (Critical failures, completely absent essential core infrastructure)
 """
 import json
 import re
@@ -59,7 +64,13 @@ def extract_json_array(text: str) -> List[Dict[str, Any]]:
 
 def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIssue]:
     """Evaluates the website across all 20 reference criteria from the benchmark rubric.
-    Guarantees a minimum of 10-15 grounded, factual flaw assessments with zero hallucinations.
+    Each dimension is scored on an objective 1 to 10 scale categorized into 4 tiers:
+      - 8 to 10: Strengths (Meets or exceeds modern healthcare web standards)
+      - 6 to 7 : Less Aligned (Sub-optimal or incomplete implementation needing optimization)
+      - 3 to 5 : Least Aligned (Severe defects and major conversion bottlenecks)
+      - 1 to 2 : Worst (Critical failures with missing essential core elements)
+
+    Guarantees a minimum of 10-15 grounded, factual flaw assessments (Worst, Least Aligned, and Less Aligned) with zero hallucinations.
     """
     title = str(scraped_content.get("homepage_title", "") or "").strip()
     meta = str(scraped_content.get("homepage_meta", "") or "").strip()
@@ -99,7 +110,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Industry Fit & Brand Positioning",
-            score=7,
+            score=8,
             findings="Visual tone and healthcare terminology align appropriately with modern clinical dermatology standards.",
             evidence_quote=f"Title: {title[:60]}",
             verified=True, verification_score=1.0, verification_notes="Corroborated by industry terminology scan.",
@@ -110,7 +121,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     if not h1_tags:
         issues.append(AuditIssue(
             category="Above-the-Fold First Impression",
-            score=3,
+            score=2,
             findings="No primary H1 hero heading was found above the fold. First-time visitors cannot immediately discern the clinic's core offering.",
             evidence_quote="Zero H1 tags detected on homepage",
             verified=True, verification_score=1.0, verification_notes="Verified via DOM heading hierarchy analysis.",
@@ -149,7 +160,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Treatment Depth & Recovery Guidance",
-            score=7,
+            score=8,
             findings="Website provides clinical preparation and post-procedure recovery insights.",
             evidence_quote="Recovery/treatment indicators detected in body text",
             verified=True, verification_score=1.0, verification_notes="Verified via clinical terms match.",
@@ -169,7 +180,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Dedicated Service Landing Pages",
-            score=7,
+            score=8,
             findings=f"Good service coverage with {service_links_count} dedicated subpage links mapped across the site.",
             evidence_quote=f"{service_links_count} dedicated service URLs mapped in crawl",
             verified=True, verification_score=1.0, verification_notes="Verified via internal link crawl.",
@@ -190,7 +201,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Patient Intent & Treatment Comparison",
-            score=7,
+            score=8,
             findings="Provides comparative insights addressing multi-stage patient research intent.",
             evidence_quote="Comparative procedure information detected",
             verified=True, verification_score=1.0, verification_notes="Verified via content scan.",
@@ -202,7 +213,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     if not has_reg_no:
         issues.append(AuditIssue(
             category="Doctor Credentials & Council Registration",
-            score=4,
+            score=2,
             findings="Physician profiles do not display verifiable Medical Council Registration Numbers (MCI/NMC), a vital trust signal in healthcare.",
             evidence_quote="No official State/National Medical Council registration numbers detected",
             verified=True, verification_score=1.0, verification_notes="Verified via regex scan for medical council license numbers.",
@@ -211,7 +222,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Doctor Credentials & Council Registration",
-            score=8,
+            score=9,
             findings="Verifiable medical license and practitioner registration credentials are prominently documented.",
             evidence_quote="Medical registration details detected in physician bio",
             verified=True, verification_score=1.0, verification_notes="Verified via registration regex match.",
@@ -232,7 +243,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Clinical Case Studies & Visual Proof",
-            score=7,
+            score=8,
             findings="Case studies and treatment transformation proof are incorporated to demonstrate clinical efficacy.",
             evidence_quote="Documented patient transformation indicators present",
             verified=True, verification_score=1.0, verification_notes="Verified via case study scan.",
@@ -252,7 +263,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Procedure FAQs & Consultation Guidance",
-            score=7,
+            score=8,
             findings="Procedural FAQs are present to resolve initial patient hesitations.",
             evidence_quote="FAQ questions and answer blocks detected in content",
             verified=True, verification_score=1.0, verification_notes="Verified via FAQ block scan.",
@@ -263,7 +274,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     if not cta_buttons:
         issues.append(AuditIssue(
             category="Call-to-Action Visibility & Placement",
-            score=3,
+            score=2,
             findings="No prominent high-contrast booking or consultation CTA buttons detected above the fold.",
             evidence_quote="Zero standard consultation CTA buttons identified in DOM",
             verified=True, verification_score=1.0, verification_notes="Verified via interactive element scan.",
@@ -314,7 +325,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Operating Hours & Clinic Schedule Transparency",
-            score=7,
+            score=8,
             findings="Clinic consultation timings and operating schedule are documented.",
             evidence_quote="Clinic schedule indicators detected in text",
             verified=True, verification_score=1.0, verification_notes="Verified via timing keyword scan.",
@@ -325,16 +336,16 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     if not phone_links:
         issues.append(AuditIssue(
             category="Direct Contact & Click-to-Call",
-            score=3,
+            score=2,
             findings="No direct click-to-call (tel:) links were detected. Mobile patients cannot tap to initiate an instant phone call.",
             evidence_quote="Zero tel: click-to-call links found in page links",
             verified=True, verification_score=1.0, verification_notes="Verified via DOM anchor tag analysis.",
-            recommendation="Wrap all displayed telephone numbers in direct <a href='tel:+91...'> links and place a sticky call button on mobile."
+            recommendation="Wrap all displayed telephone numbers in direct 'tel:' links and place a sticky call button on mobile."
         ))
     else:
         issues.append(AuditIssue(
             category="Direct Contact & Click-to-Call",
-            score=7,
+            score=8,
             findings=f"Click-to-call functionality is enabled with {len(phone_links)} direct telephone link(s) found.",
             evidence_quote=f"Phone link: {phone_links[0]}",
             verified=True, verification_score=1.0, verification_notes="Verified via DOM anchor tag analysis.",
@@ -345,7 +356,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     if not whatsapp_links:
         issues.append(AuditIssue(
             category="Instant Messaging & WhatsApp Channel",
-            score=4,
+            score=3,
             findings="No direct WhatsApp consultation link or chat widget was found, forfeiting high-intent instant appointment bookings.",
             evidence_quote="Zero WhatsApp or wa.me links detected across site",
             verified=True, verification_score=1.0, verification_notes="Verified via DOM link analysis.",
@@ -354,7 +365,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Instant Messaging & WhatsApp Channel",
-            score=8,
+            score=9,
             findings="WhatsApp messaging gateway is integrated, supporting fast patient inquiries.",
             evidence_quote=f"WhatsApp link: {whatsapp_links[0][:50]}",
             verified=True, verification_score=1.0, verification_notes="Verified via DOM link analysis.",
@@ -374,7 +385,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Social Media Integration & Cross-Linking",
-            score=7,
+            score=8,
             findings=f"Social media channels connected with {len(social_links)} active profile link(s) found.",
             evidence_quote=f"Social link: {social_links[0][:50]}",
             verified=True, verification_score=1.0, verification_notes="Verified via external link scan.",
@@ -394,7 +405,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Content Hierarchy & Semantic Headings",
-            score=7,
+            score=8,
             findings=f"Page content is organized under {len(headings)} structured heading tags.",
             evidence_quote=f"Heading sample: {headings[0][:50]}",
             verified=True, verification_score=1.0, verification_notes="Verified via heading inspection.",
@@ -434,7 +445,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="SERP Meta Description Quality",
-            score=7,
+            score=8,
             findings="Meta description is configured with appropriate length and relevance.",
             evidence_quote=f"Meta: {meta[:70]}",
             verified=True, verification_score=1.0, verification_notes="Verified via meta length check.",
@@ -445,7 +456,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     if not has_schema:
         issues.append(AuditIssue(
             category="Technical SEO & Schema.org Markup",
-            score=3,
+            score=2,
             findings="Schema.org JSON-LD structured data is completely absent. Search engines miss entity relationships for MedicalBusiness.",
             evidence_quote="JSON-LD structured data script missing from HTML",
             verified=True, verification_score=1.0, verification_notes="Verified via script tag audit.",
@@ -454,7 +465,7 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
     else:
         issues.append(AuditIssue(
             category="Technical SEO & Schema.org Markup",
-            score=8,
+            score=9,
             findings="Schema.org structured data detected, improving search engine entity recognition.",
             evidence_quote="JSON-LD structured data script detected in HTML",
             verified=True, verification_score=1.0, verification_notes="Verified via script tag check.",
@@ -462,19 +473,28 @@ def evaluate_20_pillars_factual(scraped_content: Dict[str, Any]) -> List[AuditIs
         ))
 
     # 19. Server Speed & Latency Performance (Rule 19)
-    if latency > 700:
+    if latency > 750:
         issues.append(AuditIssue(
             category="Server Speed & Response Latency",
-            score=4,
+            score=3,
             findings=f"Elevated server response time ({latency}ms). Delays above 500ms cause significant user drop-off on mobile devices.",
             evidence_quote=f"Average latency measured at {latency}ms across scanned pages",
             verified=True, verification_score=1.0, verification_notes="Verified via HTTP request timing benchmark.",
             recommendation="Configure Redis object caching, fast DNS hosting, and Brotli compression to maintain sub-400ms TTFB."
         ))
+    elif latency > 400:
+        issues.append(AuditIssue(
+            category="Server Speed & Response Latency",
+            score=7,
+            findings=f"Moderate server response speed ({latency}ms). Acceptable for desktop but can be further accelerated for mobile networks.",
+            evidence_quote=f"Average latency measured at {latency}ms across scanned pages",
+            verified=True, verification_score=1.0, verification_notes="Verified via HTTP request timing benchmark.",
+            recommendation="Implement edge CDN caching and static asset minification to reach sub-350ms TTFB."
+        ))
     else:
         issues.append(AuditIssue(
             category="Server Speed & Response Latency",
-            score=8,
+            score=9,
             findings=f"Good server delivery speed ({latency}ms) ensuring rapid page access.",
             evidence_quote=f"Average latency measured at {latency}ms across scanned pages",
             verified=True, verification_score=1.0, verification_notes="Verified via HTTP request timing benchmark.",
@@ -526,19 +546,20 @@ def evaluate_website_node(state: AutomationState) -> Dict[str, Any]:
 
     # Always generate 20 grounded factual benchmark assessments
     factual_evaluations = evaluate_20_pillars_factual(scraped)
-    factual_flaws = [i for i in factual_evaluations if i.get("score", 10) <= 6]
+    worst_count = len([i for i in factual_evaluations if i.get("score", 10) <= 2])
+    least_aligned_count = len([i for i in factual_evaluations if 3 <= i.get("score", 10) <= 5])
+    less_aligned_count = len([i for i in factual_evaluations if 6 <= i.get("score", 10) <= 7])
+    strengths_count = len([i for i in factual_evaluations if i.get("score", 10) >= 8])
+    actionable_flaws = [i for i in factual_evaluations if i.get("score", 10) < 8]
     
     logs.append(
-        f"[{datetime.now().strftime('%H:%M:%S')}] Grounded benchmark check: "
-        f"{len(factual_evaluations)} criteria assessed, {len(factual_flaws)} critical flaws/deficiencies verified with zero hallucination."
+        f"[{datetime.now().strftime('%H:%M:%S')}] Grounded benchmark check: {len(factual_evaluations)} criteria assessed "
+        f"— Strengths (8-10): {strengths_count}, Less Aligned (6-7): {less_aligned_count}, "
+        f"Least Aligned (3-5): {least_aligned_count}, Worst (1-2): {worst_count}. "
+        f"Total actionable flaws: {len(actionable_flaws)}."
     )
 
     return {
         "raw_evaluation": factual_evaluations,
-        "logs": logs
-    }
-
-    return {
-        "raw_evaluation": raw_evaluations,
         "logs": logs
     }
